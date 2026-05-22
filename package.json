@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "create-admin": "tsx scripts/create-admin.ts"
+    "create-admin": "tsx scripts/create-admin.ts",
+    "build:cf": "opennextjs-cloudflare build && node scripts/purge-wasm.js",
+    "deploy": "opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare deploy",
+    "preview": "opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare preview"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
