@@ -13,20 +13,32 @@ interface CustomerUser {
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const [customerUser, setCustomerUser] = useState<CustomerUser | null>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const { toggleCart, cartCount } = useCart()
 
-  // Sync scroll state
+  // Sync scroll state and scroll direction
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 20)
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - move header up and hide
+        setIsVisible(false)
+      } else {
+        // Scrolling up - reveal header
+        setIsVisible(true)
+      }
+      setLastScrollY(currentScrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   // Sync and load Customer Profile
   useEffect(() => {
@@ -80,7 +92,9 @@ export default function Navbar() {
   }
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+    <header className={`sticky top-0 z-50 transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    } ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
         <Link href="/" className="text-2xl font-extrabold tracking-tighter text-primary">
           ESTORE
@@ -126,6 +140,15 @@ export default function Navbar() {
                       {customerUser.email}
                     </span>
                   </div>
+
+                  <Link
+                    href="/orders"
+                    onClick={() => setDropdownOpen(false)}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-on-surface hover:bg-surface-container rounded-xl transition-colors cursor-pointer mb-1"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 text-primary" />
+                    My Order History
+                  </Link>
 
                   <button
                     onClick={handleLogout}

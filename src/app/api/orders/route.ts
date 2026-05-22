@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import crypto from 'crypto'
 
 export async function POST(request: Request) {
   try {
@@ -11,12 +12,39 @@ export async function POST(request: Request) {
       zipCode, 
       totalAmount, 
       items, 
-      userId 
+      userId,
+      paymentId,
+      razorpayOrderId,
+      signature
     } = body
 
     // Validate inputs
     if (!customerName || !customerEmail || !shippingAddress || !zipCode || !totalAmount || !items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Missing or invalid required fields' }, { status: 400 })
+    }
+
+    // Verify payment signature if authentic Razorpay keys are configured in environment
+    const keyId = process.env.RAZORPAY_KEY_ID
+    const keySecret = process.env.RAZORPAY_KEY_SECRET
+    if (keyId && keySecret && keyId.trim() !== '' && keySecret.trim() !== '') {
+      if (!paymentId || !razorpayOrderId || !signature) {
+        return NextResponse.json({ 
+          error: 'Payment details and signature token are required for authentication.' 
+        }, { status: 400 })
+      }
+
+      const generatedSignature = crypto
+        .createHmac('sha256', keySecret)
+        .update(`${razorpayOrderId}|${paymentId}`)
+        .digest('hex')
+
+      if (generatedSignature !== signature) {
+        console.error('Razorpay signature mismatch:', {
+          submitted: signature,
+          generated: generatedSignature
+        })
+        return NextResponse.json({ error: 'Payment signature validation failed.' }, { status: 400 })
+      }
     }
 
     // Create the order with nested items and decrement stock transactionally
@@ -88,5 +116,32 @@ export async function POST(request: Request) {
       { error: error.message || 'Internal Server Error' }, 
       { status: isValidationErr ? 400 : 500 }
     )
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+
+    const filter: any = {}
+    if (userId) {
+      filter.userId = userId
+    }
+
+    const orders = await prisma.order.findMany({
+      where: filter,
+      include: {
+        items: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    return NextResponse.json(orders)
+  } catch (error: any) {
+    console.error('Failed to fetch orders:', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
