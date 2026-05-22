@@ -3,7 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'standalone',
   serverExternalPackages: ['@prisma/client', '@prisma/adapter-neon', '@neondatabase/serverless'],
-  /* config options here */
+  experimental: {
+    turbo: undefined,
+  },
 };
 
 export default nextConfig;
