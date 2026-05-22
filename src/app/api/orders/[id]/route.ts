@@ -54,3 +54,23 @@ export async function PATCH(
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    
+    // Deleting the order. Since OrderItem has onDelete: Cascade,
+    // this will automatically delete all related OrderItems in the database.
+    const deletedOrder = await prisma.order.delete({
+      where: { id },
+    })
+
+    return NextResponse.json(deletedOrder, { status: 200 })
+  } catch (error) {
+    console.error('Failed to delete order:', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
+}

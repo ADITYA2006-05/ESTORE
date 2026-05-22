@@ -256,6 +256,26 @@ export default function Admin() {
     }
   }
 
+  // Handle order deletion
+  const handleDeleteOrder = async (id: string) => {
+    if (!confirm(`Are you sure you want to delete Order #${id.toUpperCase()}?`)) return
+
+    try {
+      const res = await fetch(`/api/orders/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (res.ok) {
+        setOrders(orders.filter((o) => o.id !== id))
+      } else {
+        alert('Failed to delete order')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Error connecting to servers')
+    }
+  }
+
   // Update order status
   const handleUpdateOrderStatus = async (orderId: string, newStatus: string) => {
     setUpdatingOrderId(orderId)
@@ -729,26 +749,35 @@ export default function Admin() {
                             {updatingOrderId === o.id ? (
                               <RefreshCw className="w-4 h-4 text-primary animate-spin" />
                             ) : (
-                              <div className="relative">
-                                <select
-                                  value={o.status}
-                                  onChange={(e) => handleUpdateOrderStatus(o.id, e.target.value)}
-                                  className={`pl-3 pr-8 py-2 rounded-xl text-xs font-black border cursor-pointer appearance-none transition-all focus:outline-none ${
-                                    o.status === 'Placed'
-                                      ? 'bg-blue-50 text-blue-700 border-blue-200'
-                                      : o.status === 'Processing'
-                                        ? 'bg-amber-50 text-amber-700 border-amber-200'
-                                        : o.status === 'In Transit'
-                                          ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
-                                          : 'bg-green-50 text-green-700 border-green-200'
-                                  }`}
+                              <div className="flex items-center gap-2">
+                                <div className="relative">
+                                  <select
+                                    value={o.status}
+                                    onChange={(e) => handleUpdateOrderStatus(o.id, e.target.value)}
+                                    className={`pl-3 pr-8 py-2 rounded-xl text-xs font-black border cursor-pointer appearance-none transition-all focus:outline-none ${
+                                      o.status === 'Placed'
+                                        ? 'bg-blue-50 text-blue-700 border-blue-200'
+                                        : o.status === 'Processing'
+                                          ? 'bg-amber-50 text-amber-700 border-amber-200'
+                                          : o.status === 'In Transit'
+                                            ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                                            : 'bg-green-50 text-green-700 border-green-200'
+                                    }`}
+                                  >
+                                    <option value="Placed">Placed</option>
+                                    <option value="Processing">Processing</option>
+                                    <option value="In Transit">In Transit</option>
+                                    <option value="Delivered">Delivered</option>
+                                  </select>
+                                  <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none opacity-60" />
+                                </div>
+                                <button
+                                  onClick={() => handleDeleteOrder(o.id)}
+                                  className="p-2 text-on-surface-variant hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors cursor-pointer"
+                                  title="Delete Order"
                                 >
-                                  <option value="Placed">Placed</option>
-                                  <option value="Processing">Processing</option>
-                                  <option value="In Transit">In Transit</option>
-                                  <option value="Delivered">Delivered</option>
-                                </select>
-                                <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none opacity-60" />
+                                  <Trash2 className="w-4.5 h-4.5" />
+                                </button>
                               </div>
                             )}
                           </div>
