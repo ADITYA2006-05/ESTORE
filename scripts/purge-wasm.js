@@ -19,18 +19,7 @@ if (fs.existsSync(targetDir)) {
       const isSqlite = file.includes('sqlite');
       const isMysql = file.includes('mysql');
       
-      let shouldDelete = false;
-      
-      if (PRESERVE_ENGINE === 'sqlite') {
-        // Purge postgresql and mysql
-        if (isPostgres || isMysql) shouldDelete = true;
-      } else if (PRESERVE_ENGINE === 'postgresql') {
-        // Purge sqlite and mysql
-        if (isSqlite || isMysql) shouldDelete = true;
-      } else {
-        // Purge mysql by default if unknown
-        if (isMysql) shouldDelete = true;
-      }
+      let shouldDelete = false; // Preserving all engines to prevent Wrangler bundle collector crashes
       
       if (shouldDelete) {
         const filePath = path.join(targetDir, file);
