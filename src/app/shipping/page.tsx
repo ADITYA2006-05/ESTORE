@@ -26,7 +26,7 @@ export default function ShippingReturns() {
   const shippingSteps = [
     {
       title: 'Order Placed & Verified',
-      description: 'Your premium selection is secured, payment is validated via Razorpay, and details are logged in our SQLite registry.',
+      description: 'Your premium selection is secured, payment is validated via our secure gate, and details are logged in our database registry.',
       icon: Inbox,
       time: 'Within 2 hours'
     },
@@ -68,7 +68,7 @@ export default function ShippingReturns() {
     },
     {
       title: 'Instant Refund Processing',
-      description: 'Refund is processed immediately back to your original payment method (via Razorpay dashboard API).',
+      description: 'Refund is processed immediately back to your original payment method via our merchant gateway dashboard.',
       icon: RotateCcw
     }
   ]
@@ -290,7 +290,7 @@ export default function ShippingReturns() {
                       <span className="text-[9px] font-extrabold text-slate-600">✓</span>
                     </div>
                     <p className="text-xs text-on-surface-variant leading-relaxed">
-                      <strong>Refunds</strong> are refunded directly to the original bank account or card processed via Razorpay within 5-7 business days.
+                      <strong>Refunds</strong> are refunded directly to the original bank account or card processed via our merchant gateway within 5-7 business days.
                     </p>
                   </div>
                   <div className="flex gap-3">

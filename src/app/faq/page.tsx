@@ -24,19 +24,19 @@ const faqData = [
     id: 'pay-options',
     category: 'payments',
     question: 'How do I pay for my luxury items?',
-    answer: 'We utilize Razorpay to offer secure, frictionless payments. We support all major Credit/Debit cards (Visa, Mastercard, RuPay, Amex), UPI transactions, Net Banking, and direct digital wallets. No extra processing fees are levied.'
+    answer: 'We offer secure, frictionless payments directly. We support all major Credit/Debit cards (Visa, Mastercard, RuPay, Amex). No extra processing fees are levied.'
   },
   {
     id: 'pay-safety',
     category: 'payments',
     question: 'Are my payment transactions secure?',
-    answer: 'Absolutely. All payments are securely routed and authorized through Razorpay\'s PCI-DSS compliant vault. We do not store or process card numbers directly in our database. All client connection flows are encrypted with SSL protocols.'
+    answer: 'Absolutely. All payments are securely routed and authorized through our PCI-DSS compliant merchant vault. We do not store or process card numbers directly in our database. All client connection flows are encrypted with secure SSL protocols.'
   },
   {
     id: 'pay-failure',
     category: 'payments',
     question: 'What should I do if my payment fails but the money is debited?',
-    answer: 'This represents a temporary Razorpay/Bank network reconciliation delay. If an order is not successfully created, the bank will automatically reverse the charge back to your original source within 24 to 48 hours. You can also contact support@estore.vip with the bank reference code to verify.'
+    answer: 'This represents a temporary bank network reconciliation delay. If an order is not successfully created, the bank will automatically reverse the charge back to your original source within 24 to 48 hours. You can also contact support@estore.vip to verify.'
   },
   {
     id: 'ship-cost',
@@ -66,7 +66,7 @@ const faqData = [
     id: 'return-time',
     category: 'returns',
     question: 'How long does a refund take to process?',
-    answer: 'Once our authentication team receives and approves the returned items, your refund is instantly submitted to the Razorpay gateway. Depending on your financial institution, the credits will appear in your original payment source within 5 to 7 business days.'
+    answer: 'Once our authentication team receives and approves the returned items, your refund is instantly submitted to our merchant gateway. Depending on your financial institution, the credits will appear in your original payment source within 5 to 7 business days.'
   },
   {
     id: 'return-exchange',
@@ -315,7 +315,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h1>
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Quick, comprehensive answers regarding Razorpay payments, luxury logistics pipelines, return options, and Google account credentials.
+            Quick, comprehensive answers regarding secure card payments, luxury logistics pipelines, return options, and Google account credentials.
           </p>
         </div>
       </section>

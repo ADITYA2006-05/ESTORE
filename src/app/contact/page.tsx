@@ -319,7 +319,7 @@ export default function ContactUs() {
                     >
                       <option value="general">General Store Assistance</option>
                       <option value="orders">Order Tracking & Modifications</option>
-                      <option value="payments">Razorpay Billing & Failures</option>
+                      <option value="payments">Secure Billing & Failures</option>
                       <option value="returns">Product Returns & Exchanges</option>
                       <option value="concierge">VIP Custom Curation Service</option>
                     </select>

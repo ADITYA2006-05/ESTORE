@@ -16,7 +16,7 @@ export default function HelpCenter() {
       description: 'Track orders, modify shipping info, or manage checkout payments.',
       links: [
         { label: 'Track live dispatch', href: '/orders' },
-        { label: 'Razorpay billing info', href: '/faq?cat=payments' },
+        { label: 'Secure billing info', href: '/faq?cat=payments' },
         { label: 'Cancel or edit order', href: '/contact?topic=orders' }
       ]
     },
@@ -43,7 +43,7 @@ export default function HelpCenter() {
   ]
 
   const featuredArticles = [
-    { title: 'How does the Razorpay Developer Sandbox work?', href: '/faq#sandbox', readingTime: '2 min read' },
+    { title: 'How secure is the checkout payment process?', href: '/faq#pay-safety', readingTime: '2 min read' },
     { title: 'What is our 30-day premium return policy?', href: '/shipping#returns', readingTime: '3 min read' },
     { title: 'How do I log into the administrative monitor dashboard?', href: '/faq#admin', readingTime: '1 min read' }
   ]
