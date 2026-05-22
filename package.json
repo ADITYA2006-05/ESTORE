@@ -3,15 +3,16 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "build": "next build --webpack",
+    "postinstall": "prisma generate",
+    "build": "prisma generate && next build --webpack",
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
     "create-admin": "tsx scripts/create-admin.ts",
-    "build:cf": "opennextjs-cloudflare build && node scripts/purge-wasm.js",
-    "deploy": "opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare preview",
-    "upload": "opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare upload",
+    "build:cf": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js",
+    "deploy": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare deploy",
+    "preview": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare preview",
+    "upload": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
