@@ -79,17 +79,28 @@ files.forEach(filePath => {
 
 console.log(`Path optimization finished: ${modifiedCount} files updated.`);
 
-// 2. Log status of the WASM files to ensure they are preserved
-const runtimeDir = path.join(openNextDir, 'server-functions', 'default', 'node_modules', '@prisma', 'client', 'runtime');
-if (fs.existsSync(runtimeDir)) {
-  const runtimeFiles = fs.readdirSync(runtimeDir);
-  runtimeFiles.forEach(file => {
-    if (file.endsWith('.wasm')) {
-      console.log(`Preserved engine: ${file} (Ready for Wrangler deployment)`);
+// 2. Recursively find and shrink all .wasm files to a minimal 8-byte binary
+function shrinkWasmFiles(dir) {
+  if (!fs.existsSync(dir)) return;
+  
+  const list = fs.readdirSync(dir);
+  list.forEach(file => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    if (stat && stat.isDirectory()) {
+      shrinkWasmFiles(filePath);
+    } else {
+      if (file.endsWith('.wasm')) {
+        const minimalWasm = Buffer.from([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00]);
+        const originalSize = stat.size;
+        fs.writeFileSync(filePath, minimalWasm);
+        console.log(`Shrunk WASM engine: ${path.relative(projectRoot, filePath)} (${originalSize} bytes -> 8 bytes)`);
+      }
     }
   });
-} else {
-  console.log('Notice: Runtime directory not found. Skipping file listing.');
 }
+
+console.log('Shrinking WASM engines...');
+shrinkWasmFiles(openNextDir);
 console.log('----------------------------------------------');
 
