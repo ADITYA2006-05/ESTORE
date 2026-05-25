@@ -25,34 +25,35 @@ export default function ProductCard({ id, name, price, image, category, stock }:
   return (
     <motion.div 
       whileHover={stock > 0 ? { y: -8 } : {}}
-      className="product-card group relative overflow-hidden bg-white border border-surface-container rounded-3xl transition-all shadow-sm"
+      className="product-card group relative overflow-hidden bg-white p-4"
     >
-      <div className="aspect-square relative overflow-hidden bg-background">
+      {/* Padded, centered, and scaled-down product image frame */}
+      <div className="aspect-[4/3] relative overflow-hidden bg-[#faf8f5] border border-secondary/10 rounded-2xl flex items-center justify-center p-6 transition-all duration-300 group-hover:bg-[#f4f1ea] z-10">
         <img 
           src={image} 
           alt={name}
-          className={`object-cover w-full h-full transition-transform duration-500 ${
+          className={`object-contain w-full h-full max-h-[140px] transition-all duration-500 ease-out ${
             stock > 0 
-              ? 'group-hover:scale-110' 
+              ? 'group-hover:scale-105' 
               : 'grayscale contrast-75 opacity-60'
           }`}
         />
         
         {/* Badges Stack */}
-        <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
-          <span className="bg-white/95 backdrop-blur-sm text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider text-on-surface shadow-sm">
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+          <span className="bg-white/95 backdrop-blur-sm text-[8px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider text-on-surface shadow-sm border border-secondary/5">
             {category}
           </span>
           {stock === 0 ? (
-            <span className="bg-red-500 text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <span className="bg-red-500 text-white text-[8px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider shadow-sm">
               Sold Out
             </span>
           ) : stock <= 5 ? (
-            <span className="bg-amber-500 text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <span className="bg-[#c86348] text-white text-[8px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider shadow-sm">
               Only {stock} Left!
             </span>
           ) : (
-            <span className="bg-green-600 text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <span className="bg-primary text-white text-[8px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider shadow-sm">
               In Stock
             </span>
           )}
@@ -60,8 +61,8 @@ export default function ProductCard({ id, name, price, image, category, stock }:
 
         {/* Center Sold Out Overlay */}
         {stock === 0 && (
-          <div className="absolute inset-0 bg-black/35 flex items-center justify-center pointer-events-none">
-            <span className="bg-white/95 text-red-600 font-black text-xs px-4 py-2 rounded-xl uppercase tracking-widest shadow-md">
+          <div className="absolute inset-0 bg-black/35 flex items-center justify-center pointer-events-none rounded-2xl">
+            <span className="bg-white/95 text-red-600 font-extrabold text-[10px] px-3.5 py-1.5 rounded-lg uppercase tracking-widest shadow-md">
               Sold Out
             </span>
           </div>
@@ -71,16 +72,16 @@ export default function ProductCard({ id, name, price, image, category, stock }:
         {stock > 0 && (
           <button 
             onClick={handleAddToCart}
-            className="absolute bottom-4 right-4 p-3 bg-primary text-white rounded-full shadow-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-110 cursor-pointer z-20"
+            className="absolute bottom-3 right-3 p-2.5 bg-primary text-white rounded-xl shadow-lg opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-115 cursor-pointer z-20"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4" />
           </button>
         )}
       </div>
       
-      <div className="p-6">
-        <h3 className={`text-lg font-bold mb-1 transition-colors ${stock > 0 ? 'group-hover:text-primary' : 'text-on-surface-variant/70 line-through'}`}>{name}</h3>
-        <p className="text-on-surface-variant font-medium">₹{price.toFixed(2)}</p>
+      <div className="pt-5 px-2 pb-2">
+        <h3 className={`text-base font-extrabold mb-1.5 transition-colors line-clamp-1 ${stock > 0 ? 'group-hover:text-secondary' : 'text-on-surface-variant/70 line-through'}`}>{name}</h3>
+        <p className="text-secondary font-extrabold text-sm">₹{price.toFixed(2)}</p>
       </div>
     </motion.div>
   )

@@ -1,73 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
   
-  --color-primary: #2f6760;
-  --color-primary-container: #7eb6ad;
-  --color-on-primary-container: #064841;
+  --color-primary: #1d3c34; /* Rich Forest Olive */
+  --color-primary-container: #eae6dd; /* Soft Oatmeal Linen */
+  --color-on-primary-container: #122822;
   
-  --color-secondary: #67558c;
-  --color-secondary-container: #d5bffe;
-  --color-on-secondary-container: #5d4b81;
+  --color-secondary: #c86348; /* Warm Artisanal Terracotta Clay */
+  --color-secondary-container: #f7e8e4; /* Delicate Clay Wash */
+  --color-on-secondary-container: #7d3421;
   
-  --color-tertiary: #0c6780;
-  --color-tertiary-container: #6eb5d1;
+  --color-tertiary: #4a6670; /* Cool Slate River Stone */
+  --color-tertiary-container: #d9e2e6;
   
-  --color-background: #f9f9f9;
+  --color-background: #faf8f5; /* Premium Soft Cream Oatmeal */
   --color-surface: #ffffff;
-  --color-on-surface: #1a1c1c;
-  --color-on-surface-variant: #404947;
+  --color-on-surface: #1e2221;
+  --color-on-surface-variant: #565d5b;
   
-  --radius-xl: 1.5rem;
-  --radius-lg: 1rem;
-  --radius-md: 0.75rem;
-  --radius-sm: 0.25rem;
+  --radius-xl: 1.75rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.85rem;
+  --radius-sm: 0.35rem;
   
-  --shadow-level2: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
-  --shadow-level3: 0 12px 40px 0 rgba(0, 0, 0, 0.08);
+  --shadow-level2: 0 4px 24px -2px rgba(50, 45, 30, 0.03), 0 2px 10px -1px rgba(50, 45, 30, 0.02);
+  --shadow-level3: 0 16px 48px -4px rgba(45, 40, 30, 0.06), 0 4px 16px -2px rgba(45, 40, 30, 0.04);
 }
 
 :root {
-  --background: #f9f9f9;
-  --foreground: #1a1c1c;
+  --background: #faf8f5;
+  --foreground: #1e2221;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .product-card {
   background: white;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-level2);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(225, 220, 205, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover {
   box-shadow: var(--shadow-level3);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  border-color: rgba(200, 99, 72, 0.3);
 }
 
 .btn-primary {
-  background-color: var(--color-primary-container);
+  background-color: var(--color-primary);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.75rem;
   border-radius: var(--radius-lg);
-  font-weight: 600;
-  transition: all 0.2s;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(29, 60, 52, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary);
-  transform: scale(0.98);
+  background-color: #2c594c;
+  transform: scale(0.97);
+  box-shadow: 0 4px 16px rgba(29, 60, 52, 0.15);
 }
