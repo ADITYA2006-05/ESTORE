@@ -94,17 +94,17 @@ export default function Navbar() {
   return (
     <header className={`sticky top-0 z-50 transition-transform duration-300 ${
       isVisible ? 'translate-y-0' : '-translate-y-full'
-    } ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+    } ${isScrolled ? 'bg-[#faf8f5]/90 backdrop-blur-md border-b border-secondary/10 shadow-sm' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-extrabold tracking-tighter text-primary">
-          ESTORE
+        <Link href="/" className="text-xl font-bold tracking-[0.2em] font-serif text-primary uppercase hover:text-secondary transition-colors">
+          E-Store
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/shop" className="text-sm font-semibold hover:text-primary transition-colors">Shop</Link>
-          <Link href="/categories" className="text-sm font-semibold hover:text-primary transition-colors">Categories</Link>
-          <Link href="/new" className="text-sm font-semibold hover:text-primary transition-colors">New Arrivals</Link>
-          <Link href="/about" className="text-sm font-semibold hover:text-primary transition-colors">About</Link>
+          <Link href="/shop" className="text-xs font-extrabold uppercase tracking-wider text-on-surface hover:text-secondary transition-colors">Shop</Link>
+          <Link href="/categories" className="text-xs font-extrabold uppercase tracking-wider text-on-surface hover:text-secondary transition-colors">Categories</Link>
+          <Link href="/new" className="text-xs font-extrabold uppercase tracking-wider text-on-surface hover:text-secondary transition-colors">New Arrivals</Link>
+          <Link href="/about" className="text-xs font-extrabold uppercase tracking-wider text-on-surface hover:text-secondary transition-colors">About</Link>
         </nav>
 
         <div className="flex items-center gap-5">
