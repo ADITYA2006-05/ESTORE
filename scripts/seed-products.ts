@@ -33,8 +33,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&q=80',
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80'
     ],
-    minPrice: 899,
-    maxPrice: 4999
+    minPrice: 299,
+    maxPrice: 1999
   },
   'Accessories': {
     category: 'Accessories',
@@ -53,8 +53,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80',
       'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&q=80'
     ],
-    minPrice: 499,
-    maxPrice: 8999
+    minPrice: 199,
+    maxPrice: 1499
   },
   'Home': {
     category: 'Home',
@@ -73,8 +73,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=80',
       'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80'
     ],
-    minPrice: 399,
-    maxPrice: 3499
+    minPrice: 149,
+    maxPrice: 999
   },
   'Food': {
     category: 'Food',
@@ -93,8 +93,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=600&q=80',
       'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&q=80'
     ],
-    minPrice: 299,
-    maxPrice: 1999
+    minPrice: 99,
+    maxPrice: 499
   },
   'Daily Wear': {
     category: 'Daily Wear',
@@ -113,8 +113,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80',
       'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80'
     ],
-    minPrice: 199,
-    maxPrice: 5999
+    minPrice: 99,
+    maxPrice: 799
   },
   'Electronics': {
     category: 'Electronics',
@@ -133,8 +133,8 @@ const categoriesInfo: Record<string, ProductGenInfo> = {
       'https://images.unsplash.com/photo-1605462863863-10d9e47e15ee?w=600&q=80',
       'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&q=80'
     ],
-    minPrice: 799,
-    maxPrice: 12999
+    minPrice: 299,
+    maxPrice: 2499
   }
 }
 
