@@ -2,30 +2,62 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
-import { ArrowRight, Sparkles, Shield, Compass, Leaf } from 'lucide-react'
+import { 
+  ArrowRight, 
+  Sparkles, 
+  Shield, 
+  Compass, 
+  Leaf, 
+  Shirt, 
+  Home as HomeIcon, 
+  Soup, 
+  Footprints, 
+  Cpu 
+} from 'lucide-react'
 
 export default function Home() {
   const categories = [
     {
       name: 'Apparel',
       description: 'Breathable, sustainable linen & organic cotton clothing.',
-      image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&q=80',
       link: '/shop?category=Apparel',
-      cols: 'col-span-1 md:col-span-2'
+      icon: Shirt,
+      color: 'bg-rose-50 text-rose-600 border-rose-100'
     },
     {
       name: 'Accessories',
       description: 'Elegant chronographs, leather backpacks & UV sunglasses.',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80',
       link: '/shop?category=Accessories',
-      cols: 'col-span-1'
+      icon: Sparkles,
+      color: 'bg-amber-50 text-amber-600 border-amber-100'
     },
     {
       name: 'Home',
       description: 'Premium handcrafted ceramics & linen bedding.',
-      image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800&q=80',
       link: '/shop?category=Home',
-      cols: 'col-span-1 md:col-span-3'
+      icon: HomeIcon,
+      color: 'bg-emerald-50 text-emerald-600 border-emerald-100'
+    },
+    {
+      name: 'Food',
+      description: 'Artisan green tea collections & organic cold-pressed oils.',
+      link: '/shop?category=Food',
+      icon: Soup,
+      color: 'bg-teal-50 text-teal-600 border-teal-100'
+    },
+    {
+      name: 'Daily Wear',
+      description: 'Ultra-soft socks, casual loungewear & premium sneakers.',
+      link: '/shop?category=Daily Wear',
+      icon: Footprints,
+      color: 'bg-blue-50 text-blue-600 border-blue-100'
+    },
+    {
+      name: 'Electronics',
+      description: 'Sleek wireless chargers, smart ambient lights & desk accessories.',
+      link: '/shop?category=Electronics',
+      icon: Cpu,
+      color: 'bg-purple-50 text-purple-600 border-purple-100'
     }
   ]
 
@@ -66,36 +98,36 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {categories.map((category, index) => (
-            <Link 
-              key={category.name} 
-              href={category.link}
-              className={`group relative overflow-hidden rounded-3xl aspect-[4/3] md:aspect-auto ${category.cols} min-h-[320px] shadow-level2 hover:shadow-level3 transition-all duration-500 block`}
-            >
-              {/* Image backdrop */}
-              <div className="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-all duration-500 z-10" />
-              <img 
-                src={category.image} 
-                alt={category.name} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              
-              {/* Content */}
-              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end z-20">
-                <span className="text-white/80 text-xs font-bold uppercase tracking-widest mb-2 block">
-                  Category Showcase
-                </span>
-                <h3 className="text-3xl font-extrabold text-white mb-2 tracking-tight flex items-center gap-2">
-                  {category.name}
-                  <ArrowRight className="w-5 h-5 opacity-0 -translate-x-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                </h3>
-                <p className="text-white/95 text-sm max-w-md leading-relaxed">
-                  {category.description}
-                </p>
-              </div>
-            </Link>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((category) => {
+            const Icon = category.icon
+            return (
+              <Link 
+                key={category.name} 
+                href={category.link}
+                className="group relative overflow-hidden rounded-3xl border border-surface-container bg-white p-8 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 flex flex-col justify-between min-h-[220px]"
+              >
+                {/* Decorative background glow on card hover */}
+                <div className="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-primary/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Icon badge */}
+                <div className={`p-4 rounded-2xl border w-fit transition-all duration-300 ${category.color}`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                
+                {/* Content */}
+                <div className="mt-6 space-y-2">
+                  <h3 className="text-2xl font-extrabold text-on-surface tracking-tight flex items-center gap-2 group-hover:text-primary transition-colors">
+                    {category.name}
+                    <ArrowRight className="w-5 h-5 opacity-0 -translate-x-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-primary" />
+                  </h3>
+                  <p className="text-on-surface-variant text-xs leading-relaxed font-medium">
+                    {category.description}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

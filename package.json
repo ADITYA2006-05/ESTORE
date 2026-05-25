@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "create-admin": "tsx scripts/create-admin.ts",
+    "seed": "tsx scripts/seed-products.ts",
     "build:cf": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js",
     "deploy": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare deploy",
     "preview": "prisma generate && opennextjs-cloudflare build && node scripts/purge-wasm.js && opennextjs-cloudflare preview",
