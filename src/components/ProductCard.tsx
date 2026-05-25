@@ -28,7 +28,7 @@ export default function ProductCard({ id, name, price, image, category, stock }:
       className="product-card group relative overflow-hidden bg-white p-4"
     >
       {/* Padded, centered, and scaled-down product image frame */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-[#faf8f5] border border-secondary/10 rounded-2xl flex items-center justify-center p-6 transition-all duration-300 group-hover:bg-[#f4f1ea] z-10">
+      <div className="aspect-[4/3] relative overflow-hidden bg-[#faf8f5] border border-secondary/10 rounded-2xl flex items-center justify-center p-4 transition-all duration-300 group-hover:bg-[#f4f1ea] z-10">
         <img 
           src={image} 
           alt={name}
